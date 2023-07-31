@@ -7,15 +7,16 @@
 <body bgcolor="#fda9c6">
 <div style="text-align: center;">
   <h1>COMMENT TOXICITY CLASSIFIER</h1>
-  <iframe src="https://giphy.com/embed/5OxZLym3HgDoQ1E7xP" width="480" height="480" frameBorder="0" title="Animation, Amber Rose saying  The energy is toxic."></iframe>
+  <iframe src="https://giphy.com/embed/5OxZLym3HgDoQ1E7xP" width="480" height="480" frameBorder="0" title="Animation, Amber Rose saying 'The energy is toxic.'"></iframe>
 </div>
  
   
 <div align="center">
     <hr><br>
     <form action = "/predict" method = "post" enctype="multipart/form-data">
-       <h3>Paste the comment here:</h3> 
-       <input type ="text" name="comment" required maxlength="10000"><br><br>
+       <h3>Paste the comment here:</h3> <br>
+      maximum length = 5000 characters <br>
+       <input type ="text" name="comment" required maxlength="5000"><br><br>
         <input type = "submit" value="Classify">
     </form>
 </div>
