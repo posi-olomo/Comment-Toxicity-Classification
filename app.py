@@ -1,12 +1,11 @@
 import pandas as pd
 import numpy as np
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import tensorflow as tf
 from tensorflow import keras
 from keras.models import load_model
 from keras import layers
 import pickle
-
 
 # Create flask app
 app = Flask(__name__)
@@ -32,7 +31,7 @@ vectorizer = layers.TextVectorization(
     )
 
 # Adapting it using dummy data
-vectorizer.adapt(tf.data.Dataset.from_tensor_slices(["xyz"]))
+# vectorizer.adapt(tf.data.Dataset.from_tensor_slices(["xyz"]))
 
 # Set the weights of the vectorizer
 vectorizer.set_weights(from_disk['weights'])
@@ -64,10 +63,14 @@ def labelling(lily):
             ll.append(hh)
     return ll
 
+@app.route("/")
+def upload():
+    return render_template("upload.html")
+
 # Create a predict method using the postman ability 'POST'
 @app.route('/predict', methods = ['POST'])
 def predict():
-    comment_text  = str(request.args.get("comment_text"))
+    comment_text  = str(request.form["comment"])
     dictionary = {'comment_text': [comment_text]}
     df = pd.DataFrame.from_dict(dictionary)
     query_df = vectorizer(df)
@@ -80,9 +83,8 @@ def predict():
 
     prediction_label = labelling(predictions_1)
 
-    # return jsonify({'Prediction': list(query_df) })
+    
     return jsonify({'Prediction': prediction_label })
-
 
 if __name__ == '__main__':
     app.run(debug=True)
