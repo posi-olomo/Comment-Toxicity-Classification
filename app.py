@@ -49,6 +49,22 @@ def answer(array):
 
 labels = ['toxic', 'severe_toxic',  'obscene', 'threat', 'insult', 'identity_hate', 'clean']
 
+def clean_data(text):
+    # Remove hyperlinks
+    res = re.sub('https\S+|www\S+|https\S+', '', text)
+
+    # Remove special character
+    res = re.sub('[^\w\s]', '', res)
+
+    # Remove numbers
+    res = re.sub('\d+', '', res)
+
+    # Remove next line syntax
+    res = re.sub('\n', '', res)
+    
+    return res
+    
+
 def labelling(lily):
     ll = []
     for i in lily:
@@ -71,6 +87,7 @@ def upload():
 @app.route('/predict', methods = ['POST'])
 def predict():
     comment_text  = str(request.form["comment"])
+    comment_text = clean_data(comment_text)
     dictionary = {'comment_text': [comment_text]}
     df = pd.DataFrame.from_dict(dictionary)
     query_df = vectorizer(df)
