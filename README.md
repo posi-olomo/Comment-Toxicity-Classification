@@ -22,22 +22,22 @@ https://comment-toxicity-classifier.onrender.com/
 
 ## Project Process
 
-Data Cleaning -> Text Vectorization Model Architecture Model Performance Deploy
+#### Data Cleaning &rarr; Text Vectorization &rarr; Model Architecture &rarr; Model Performance &rarr; Deployment
 
 The data was sourced from Kaggle: 
 https://www.kaggle.com/datasets/julian3833/jigsaw-toxic-comment-classification-challenge
-
+___
 ### Data Cleaning
 I cleaned the data by removing hyperlinks, special characters and numbers. 
-
+___
 ### Text Vectorization
 I used the Tf-Idf Text Vectorizer, which helps us to vectorize our input data into a specific number of tokens.
-
+___
 ### Model Architecture
 I built a 3-layer neural network, with 2 hidden layers with the ReLU activation function. The output layer had a Sigmoid activation function. 
 
 To ensure that the model could multi-classify, I compiled the model with a binary_crossentropy loss.
-
+___
 ### Model Performance
 The model performed well with a 
 * Training Accuracy: 99.9%
