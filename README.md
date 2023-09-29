@@ -3,7 +3,7 @@
 About 37% of young people between the ages of 12 and 17 have been bullied online. 30% have had it happen more than once.
 
 <p align="center">
-  <img src="https://github.com/posi-olomo/Comment-Toxicity-Classification/assets/75603128/212f1cac-8244-4fed-a318-194419c9bf12" style="height: 500px; width:500px"/>
+  <img src="https://github.com/posi-olomo/Comment-Toxicity-Classification/assets/75603128/212f1cac-8244-4fed-a318-194419c9bf12" style="height: 300px; width:300px"/>
 </p>
 
 <p align="center">
@@ -31,12 +31,35 @@ ___
 I cleaned the data by removing hyperlinks, special characters and numbers. 
 ___
 ### Text Vectorization
-I used the Tf-Idf Text Vectorizer, which helps us to vectorize our input data into a specific number of tokens.
+I used the Tf-Idf Text Vectorizer, which helps us to vectorize our input data into a specific number of tokens. I chose it because it prioritizes important words while penalizing commonly occuring words.
+
+To gain a better understanding of how the Tf-Idf Vectorizer works:
+
+https://www.geeksforgeeks.org/understanding-tf-idf-term-frequency-inverse-document-frequency/
 ___
 ### Model Architecture
-I built a 3-layer neural network, with 2 hidden layers with the ReLU activation function. The output layer had a Sigmoid activation function. 
+3-layer neural network:
+* 2 hidden layers with the ReLU activation function. 
+* Output layer with a Sigmoid activation function. 
 
-To ensure that the model could multi-classify, I compiled the model with a binary_crossentropy loss.
+```
+model = keras.Sequential([
+    layers.Dense(100, input_shape=(6000,), activation = "relu"),
+
+    layers.Dense(50, activation = "relu"),
+
+    layers.Dense(6, activation = "sigmoid")
+])
+```
+
+To ensure that the model could perform multi-classification, I compiled the model with a binary_crossentropy loss.
+```
+model.compile(
+optimizer = "adam",
+    loss = "binary_crossentropy",
+    metrics = ["binary_accuracy"]
+)
+```
 ___
 ### Model Performance
 The model performed well with a 
